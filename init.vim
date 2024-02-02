@@ -20,12 +20,14 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'navarasu/onedark.nvim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'danymat/neogen'
 
 call plug#end()
 
 lua require("treesitter-configs")
 lua require("coc-configs")
 lua require("term-configs")
+lua require("neogen-configs")
 
 " colorscheme dracula
 colorscheme onedark
