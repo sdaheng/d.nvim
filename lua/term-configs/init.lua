@@ -28,6 +28,7 @@ function create_vertical_terminal()
 
   -- 打开一个新的水平分割窗口，并设置高度为新高度
   vim.cmd('belowright vsplit')
+  -- vim.cmd('vertical resize ' .. new_height)
 
   -- 打开一个新的终端，可以根据需要更改终端命令
   vim.cmd('term')

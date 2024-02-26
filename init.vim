@@ -21,6 +21,7 @@ Plug 'navarasu/onedark.nvim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'danymat/neogen'
+Plug 'kdheepak/lazygit.nvim'
 
 call plug#end()
 
