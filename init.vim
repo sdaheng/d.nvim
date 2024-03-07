@@ -12,8 +12,6 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-let g:NERDTreeWinPos = "left"
-
 call plug#begin()
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -22,6 +20,9 @@ Plug 'Mofiqul/dracula.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'danymat/neogen'
 Plug 'kdheepak/lazygit.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
 
@@ -29,12 +30,15 @@ lua require("treesitter-configs")
 lua require("coc-configs")
 lua require("term-configs")
 lua require("neogen-configs")
+lua require("nvim-tree-configs")
+lua require("fzf-configs")
 
 " colorscheme dracula
 colorscheme onedark
 
 :tnoremap <Esc> <C-\><C-n>
 
+let g:NERDTreeWinPos = "left"
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
