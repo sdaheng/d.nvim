@@ -6,7 +6,13 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+    actions = {
+        open_file = {
+            resize_window = false
+        }
+    }
+})
 
 vim.api.nvim_set_keymap('n', '<leader>nn', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>nf', '<cmd>NvimTreeFindFile<CR>', { noremap = true, silent = true })
