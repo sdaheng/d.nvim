@@ -15,14 +15,17 @@ source ~/.vimrc
 call plug#begin()
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'navarasu/onedark.nvim'
-Plug 'Mofiqul/dracula.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
+
 Plug 'danymat/neogen'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'nvim-tree/nvim-web-devicons'
+
+Plug 'navarasu/onedark.nvim'
+Plug 'Mofiqul/dracula.nvim'
+Plug 'folke/tokyonight.nvim'
 
 call plug#end()
 
@@ -34,7 +37,7 @@ lua require("nvim-tree-configs")
 lua require("fzf-configs")
 
 " colorscheme dracula
-colorscheme onedark
+colorscheme tokyonight-night 
 
 :tnoremap <Esc> <C-\><C-n>
 
