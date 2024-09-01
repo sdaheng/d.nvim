@@ -1,48 +1,20 @@
--- 在 Neovim 中创建和退出自定义终端
+require'toggleterm'.setup{
+    open_mapping = [[<leader>ct]],
+    hide_numbers = true,
+    terminal_mappings = true, 
+    persist_size = true,
+}
 
--- 定义函数以创建终端
-function create_horizon_terminal()
-  -- 获取当前窗口的宽度和高度
-  local width = vim.fn.winwidth(0)
-  local height = vim.fn.winheight(0)
-
-  -- 计算终端的新高度（窗口高度的一半）
-  local new_height = math.floor(height / 3)
-
-  -- 打开一个新的水平分割窗口，并设置高度为新高度
-  vim.cmd('belowright split')
-  vim.cmd('resize ' .. new_height)
-
-  -- 打开一个新的终端，可以根据需要更改终端命令
-  vim.cmd('term')
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
--- 定义函数以创建终端
-function create_vertical_terminal()
-  -- 获取当前窗口的宽度和高度
-  local width = vim.fn.winwidth(0)
-  local height = vim.fn.winheight(0)
+vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 
-  -- 计算终端的新高度（窗口高度的一半）
-  local new_width = math.floor(width/ 2)
-
-  -- 打开一个新的水平分割窗口，并设置高度为新高度
-  vim.cmd('belowright vsplit')
-  -- vim.cmd('vertical resize ' .. new_height)
-
-  -- 打开一个新的终端，可以根据需要更改终端命令
-  vim.cmd('term')
-end
-
-
--- 定义函数以退出终端
-function exit_terminal()
-  -- 退出终端并关闭当前窗口
-  vim.cmd('bd!')
-end
-
-vim.api.nvim_set_keymap('n', '<leader>ct', '<cmd>lua create_horizon_terminal()<CR>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>ctv', '<cmd>lua create_vertical_terminal()<CR>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>et', '<cmd>lua exit_terminal()<CR>', { noremap = true, silent = true })

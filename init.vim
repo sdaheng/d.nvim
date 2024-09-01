@@ -22,6 +22,9 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'danymat/neogen'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
+Plug 'mfussenegger/nvim-dap'
 
 Plug 'navarasu/onedark.nvim'
 Plug 'Mofiqul/dracula.nvim'
