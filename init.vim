@@ -26,6 +26,9 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 Plug 'mfussenegger/nvim-dap'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+
 Plug 'navarasu/onedark.nvim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'folke/tokyonight.nvim'
@@ -38,6 +41,7 @@ lua require("term-configs")
 lua require("neogen-configs")
 lua require("nvim-tree-configs")
 lua require("fzf-configs")
+lua require("telescope-configs")
 
 " colorscheme dracula
 colorscheme tokyonight-night 

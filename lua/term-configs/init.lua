@@ -1,6 +1,5 @@
 require'toggleterm'.setup{
     open_mapping = [[<leader>ct]],
-    hide_numbers = true,
     terminal_mappings = true, 
     persist_size = true,
 }
