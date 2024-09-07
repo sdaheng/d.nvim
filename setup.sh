@@ -46,13 +46,11 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-# 遍历所有参数
 for arg in "$@"; do
   if [ "$arg" = "-i" ]; then
     install_awesome_vimrc
     install_vim_plug
     update_plugins
-    # 在这里处理 -u 参数的逻辑
   elif [ "$arg" = "-u" ]; then
     update_awsome_vimrc
     update_nvim_configs

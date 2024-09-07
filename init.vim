@@ -28,7 +28,11 @@ Plug 'mfussenegger/nvim-dap'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+Plug 'romgrk/barbar.nvim'
 
+" Plug 'nanozuki/tabby.com'
+
+" Themes
 Plug 'navarasu/onedark.nvim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'folke/tokyonight.nvim'
