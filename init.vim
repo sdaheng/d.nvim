@@ -46,6 +46,7 @@ lua require("neogen-configs")
 lua require("nvim-tree-configs")
 lua require("fzf-configs")
 lua require("telescope-configs")
+lua require("ibl-configs")
 
 " colorscheme dracula
 colorscheme tokyonight-night 
