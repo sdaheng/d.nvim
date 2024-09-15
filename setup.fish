@@ -44,21 +44,21 @@ if test (count $argv) -eq 0
     exit 1
 end
 
-# 遍历所有参数
 for arg in $argv
     switch $arg
         case "-i"
             install_awesome_vimrc
             install_vim_plug
             update_plugins
-            # 在这里处理 -u 参数的逻辑
             break
         case "-u"
             update_awsome_vimrc
             update_nvim_configs
             break
+        case "-n"
+            update_nvim_configs
+            break
         case "*"
-            # 其他未知参数的处理
             echo "Unknown option: $arg"
             help
             break

@@ -29,7 +29,7 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 Plug 'romgrk/barbar.nvim'
-
+Plug 'lukas-reineke/indent-blankline.nvim'
 " Plug 'nanozuki/tabby.com'
 
 " Themes
