@@ -25,6 +25,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
@@ -47,6 +48,7 @@ lua require("nvim-tree-configs")
 lua require("fzf-configs")
 lua require("telescope-configs")
 lua require("ibl-configs")
+lua require("dap-configs")
 
 " colorscheme dracula
 colorscheme tokyonight-night 
