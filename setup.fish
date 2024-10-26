@@ -48,7 +48,7 @@ for arg in $argv
     switch $arg
         case "-i"
             install_awesome_vimrc
-            install_vim_plug
+            #install_vim_plug # use lazy.nvim instead
             update_plugins
             break
         case "-u"

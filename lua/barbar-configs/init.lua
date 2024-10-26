@@ -46,3 +46,9 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 --
+vim.g.barbar_auto_setup = false
+
+require'barbar'.setup {
+    insert_at_end = false,
+    insert_at_start = false
+}
