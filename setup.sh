@@ -7,11 +7,6 @@ function install_awesome_vimrc {
     sh ~/.vim_runtime/install_awesome_vimrc.sh
 }
 
-function install_vim_plug {
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-}
-
 function update_awsome_vimrc {
     current_path=$PWD
 
@@ -26,7 +21,7 @@ function update_awsome_vimrc {
 
 function update_nvim_configs {
     if [ -d "$HOME/.config/nvim" ]; then
-        cp ./init.vim ~/.config/nvim
+        cp ./init.lua ~/.config/nvim
         cp -R ./lua ~/.config/nvim
     else
         echo "You need to install neovim first."
@@ -38,7 +33,6 @@ function help {
 }
 
 # first install vimrc
-# install vim-plug
 # setup my own init.vim
 
 if [ $# -eq 0 ]; then

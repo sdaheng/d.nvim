@@ -5,11 +5,6 @@ function install_awesome_vimrc
     sh $HOME/.vim_runtime/install_awesome_vimrc.sh
 end
 
-function install_vim_plug
-    sh -c 'curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-end
-
 function update_awsome_vimrc
     set current_path (pwd)
 
@@ -24,7 +19,7 @@ end
 
 function update_nvim_configs
     if test -d "$HOME/.config/nvim"
-        cp ./init.vim $HOME/.config/nvim
+        cp ./init.lua $HOME/.config/nvim
         cp -R ./lua $HOME/.config/nvim
     else
         echo "You need to install neovim first."
@@ -36,7 +31,6 @@ function help
 end
 
 # first install vimrc
-# install vim-plug
 # setup my own init.vim
 
 if test (count $argv) -eq 0
@@ -48,7 +42,6 @@ for arg in $argv
     switch $arg
         case "-i"
             install_awesome_vimrc
-            #install_vim_plug # use lazy.nvim instead
             update_plugins
             break
         case "-u"
