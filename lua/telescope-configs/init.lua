@@ -42,7 +42,7 @@ end)
 vim.keymap.set('n', '<leader>fsc', function()
   builtin.grep_string({
     additional_args = function()
-      return { '--type', 'c' }
+      return { '--type', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
     end
   })
 end)
@@ -54,7 +54,7 @@ vim.keymap.set('v', '<leader>fsc', function()
   builtin.grep_string({
     search = selected_text,
     additional_args = function()
-      return { '--type', 'c' }
+      return { '--type', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
     end
   })
 end)
@@ -62,7 +62,7 @@ end)
 vim.keymap.set('n', '<leader>fgc', function()
   builtin.live_grep({
     additional_args = function()
-      return { '--type', 'c' }
+      return { '--type', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
     end
   })
 end)

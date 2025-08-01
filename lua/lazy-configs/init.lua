@@ -35,14 +35,27 @@ require('lazy').setup({
     end
   },
 
-  -- nvim-tree
   {
-    'nvim-tree/nvim-tree.lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    lazy = false, -- neo-tree will lazily load itself
     config = function()
-      require('nvim-tree-configs')
+      require('neo-tree-configs')
     end
   },
+  -- nvim-tree
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --   config = function()
+  --     require('nvim-tree-configs')
+  --   end
+  -- },
 
   -- Neogen for annotation generation
   {
@@ -182,6 +195,17 @@ require('lazy').setup({
   },
 
   'mileszs/ack.vim',
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require('codecompanion-configs')
+    end
+  },
+  -- 'github/copilot.vim'
 
 --   {
 --   'saghen/blink.cmp',

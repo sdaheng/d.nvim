@@ -7,6 +7,14 @@ vim.opt.termguicolors = true
 
 -- empty setup using defaults
 require("nvim-tree").setup({
+    git = {
+        enable = false,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+        disable_for_dirs = {},
+        timeout = 2000,
+        cygwin_support = true,
+    },
     actions = {
         open_file = {
             resize_window = false
