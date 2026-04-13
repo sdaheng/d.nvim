@@ -7,6 +7,8 @@ require'telescope'.setup({
   },
 })
 
+require('telescope').load_extension('fzf')
+
 local builtin = require('telescope.builtin')
 
 function vim.getVisualSelection()
@@ -29,6 +31,9 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+vim.keymap.set('n', '<leader>fsh', builtin.search_history, {})
+vim.keymap.set('n', '<leader>fr', builtin.resume, {})
+
 vim.keymap.set('v', '<leader>fs', function()
 
   local selected_text = vim.getVisualSelection() 
@@ -42,7 +47,7 @@ end)
 vim.keymap.set('n', '<leader>fsc', function()
   builtin.grep_string({
     additional_args = function()
-      return { '--type', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
+      return { '-t', 'cpp', '-t', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
     end
   })
 end)
@@ -54,7 +59,7 @@ vim.keymap.set('v', '<leader>fsc', function()
   builtin.grep_string({
     search = selected_text,
     additional_args = function()
-      return { '--type', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
+      return { '-t', 'c', '-t', 'cpp', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
     end
   })
 end)
@@ -62,8 +67,10 @@ end)
 vim.keymap.set('n', '<leader>fgc', function()
   builtin.live_grep({
     additional_args = function()
-      return { '--type', 'c', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
+      return { '-t', 'c', '-t', 'cpp', '-g', '!TOOLS/', '-g', '!bsw1/', '-g', '!rte1' }
     end
   })
 end)
+
+vim.keymap.set('n', '<leader>o', require('telescope.builtin').buffers, { desc = "查找并切换缓冲区" })
 

@@ -1,3 +1,7 @@
+require('fzf-lua').setup {
+    files = {
+        fd_opts = "--color=never --type f --type l --hidden --exclude .git --exclude '*.obj'",
+    }
+}
 
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>FZF<CR>", { noremap = true, silent = true })
-
+vim.keymap.set('n', '<leader>ff', require('fzf-lua').files, { desc = "Find files" })

@@ -8,7 +8,13 @@ vim.o.packpath = vim.o.runtimepath
 -- Source the Vim configuration file (~/.vimrc)
 vim.cmd('source ~/.vimrc')
 
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
+
 require('lazy-configs')
+
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+  dofile(vim.g.base46_cache .. v)
+end
 
 -- Terminal mode escape mapping
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
@@ -21,6 +27,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- vim.wo.relativenumber = true
 
-vim.cmd('colorscheme onedark')
+-- vim.cmd('colorscheme onedark')
 vim.cmd('set number')
 

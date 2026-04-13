@@ -21,6 +21,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    branch = 'main',
     config = function()
       require('treesitter-configs')
     end
@@ -62,15 +63,31 @@ require('lazy').setup({
 
   -- fzf with post-install hook
   {
-    'junegunn/fzf',
-    build = function()
-      vim.fn['fzf#install']()
-    end,
-    config = function()
+  "ibhagwan/fzf-lua",
+  -- optional for icon support
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- or if using mini.icons/mini.nvim
+  -- dependencies = { "nvim-mini/mini.icons" },
+  ---@module "fzf-lua"
+  ---@type fzf-lua.Config|{}
+  ---@diagnostic disable: missing-fields
+  opts = {},
+  ---@diagnostic enable: missing-fields
+  config = function()
       require('fzf-configs')
-    end
-  },
+  end
 
+  },
+  -- {
+  --   'junegunn/fzf',
+  --   build = function()
+  --     vim.fn['fzf#install']()
+  --   end,
+  --   config = function()
+  --     require('fzf-configs')
+  --   end
+  -- },
+  --
   -- toggleterm.nvim
   {
     'akinsho/toggleterm.nvim',
@@ -96,8 +113,11 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    version = '*',
+    dependencies = { 
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    },
     config = function()
       require('telescope-configs')
     end
@@ -116,7 +136,7 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-        require('lualine').setup()
+        require('lualine-configs')
     end
   },
 
@@ -133,12 +153,8 @@ require('lazy').setup({
   'Mofiqul/dracula.nvim',
   'folke/tokyonight.nvim',
 
-  { 
-      "vim-scripts/bufexplorer.zip"
-  },
-
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = { "tpope/vim-repeat" },
     config = function()
       require('leap-configs')
@@ -250,8 +266,33 @@ require('lazy').setup({
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
-    opts_extend = { "sources.default" }
-  }
+    opts_extend = { "sources.default" },
+  },
+  {
+    's1n7ax/nvim-window-picker',
+    name = 'window-picker',
+    event = 'VeryLazy',
+    version = '2.*',
+    config = function()
+        require'window-picker'.setup()
+    end,
+  },
+
+  {
+   "nvchad/ui",
+    config = function()
+      require "nvchad" 
+    end
+ },
+
+ {
+    "nvchad/base46",
+    lazy = true,
+    build = function()
+      require("base46").load_all_highlights()
+    end,
+ },
+ "nvchad/volt"
 })
 
 

@@ -1,3 +1,2 @@
-
-require('lspconfig').clangd.setup({})
+vim.lsp.enable('clangd')
 
