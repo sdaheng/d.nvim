@@ -5,6 +5,15 @@ require'telescope'.setup({
       vertical = { width = 0.5 }
     },
   },
+  pickers = {
+    buffers = {
+      path_display = function(_, path)
+        local tail = vim.fn.fnamemodify(path, ":t")
+        local parent = vim.fn.fnamemodify(path, ":h:t")
+        return string.format("%s (%s)", tail, parent)
+      end,
+    },
+  },
 })
 
 require('telescope').load_extension('fzf')
