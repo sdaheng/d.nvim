@@ -1,6 +1,6 @@
 require('fzf-lua').setup {
     files = {
-        fd_opts = "--color=never --type f --type l --hidden --exclude .git --exclude '*.obj'",
+        fd_opts = "--color=never --type f --type l --hidden --exclude .git --exclude '*.obj' --exclude '*.o'",
     }
 }
 
