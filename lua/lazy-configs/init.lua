@@ -17,24 +17,20 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins using lazy.nvim
 require('lazy').setup({
-  -- nvim-treesitter with automatic updates
+  -- nvim-treesitter
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    branch = 'main',
-    config = function()
-      require('treesitter-configs')
-    end
+    opts = {
+      ensure_installed = { "c", "cpp", "go", "lua", "vim", "vimdoc", "query" },
+      auto_install = true,
+      highlight = { enable = true },
+    },
+    -- config = function(_, opts)
+    --   require('nvim-treesitter.configs').setup(opts)
+    -- end
   },
 
-  -- coc.nvim
-  {
-    'neoclide/coc.nvim',
-    branch = 'release',
-    config = function()
-      require('coc-configs')
-    end
-  },
 
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -78,17 +74,8 @@ require('lazy').setup({
   end
 
   },
-  -- {
-  --   'junegunn/fzf',
-  --   build = function()
-  --     vim.fn['fzf#install']()
-  --   end,
-  --   config = function()
-  --     require('fzf-configs')
-  --   end
-  -- },
-  --
-  -- toggleterm.nvim
+
+-- toggleterm.nvim
   {
     'akinsho/toggleterm.nvim',
     version = '*',
@@ -150,8 +137,6 @@ require('lazy').setup({
 
   -- Themes
   'navarasu/onedark.nvim',
-  'Mofiqul/dracula.nvim',
-  'folke/tokyonight.nvim',
 
   {
     url = "https://codeberg.org/andyg/leap.nvim",
@@ -199,20 +184,8 @@ require('lazy').setup({
 		vim.opt.foldlevelstart = 99
 	end,
 },
-  'mileszs/ack.vim',
-  -- {
-  --   "olimorris/codecompanion.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  --   config = function()
-  --     require('codecompanion-configs')
-  --   end
-  -- },
-  -- 'github/copilot.vim'
 
-  {
+{
     'saghen/blink.cmp',
     -- optional: provides snippets for the snippet source
     dependencies = { 'rafamadriz/friendly-snippets' },
