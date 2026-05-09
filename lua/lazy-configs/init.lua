@@ -93,22 +93,13 @@ require('lazy').setup({
   },
   'mfussenegger/nvim-dap-python',
 
-  -- Telescope and dependencies
+  -- plenary (dependency of neo-tree)
   {
     'nvim-lua/plenary.nvim',
     lazy = true
   },
-  {
-    'nvim-telescope/telescope.nvim',
-    version = '*',
-    dependencies = { 
-      'nvim-lua/plenary.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    },
-    config = function()
-      require('telescope-configs')
-    end
-  },
+
+
 
   -- Barbar for tabline
   {
