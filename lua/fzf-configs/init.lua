@@ -1,31 +1,32 @@
 local fzf = require('fzf-lua')
 
 fzf.setup({
-  "telescope",
-  keymap = {
-    fzf = {
-      ['ctrl-n'] = 'down',
-      ['ctrl-p'] = 'up',
-      ['ctrl-j'] = 'down',
-      ['ctrl-k'] = 'up',
-    },
-  },
-  -- winopts={preview={default="bat"}},
   winopts = {
-  --   fullscreen = false,
-  --   width = 0.5,
-  --   height = 0.92,
-  --   row = 0.04,
-  --   col = 0.25,
+    fullscreen = true,
     preview = {
       layout = 'vertical',
       vertical = 'up:50%',
-      -- border = 'noborder',
+      hidden = true,
     },
   },
   files = {
-    fd_opts = "--color=never --type f --type l --hidden --exclude .git --exclude '*.obj' --exclude '*.o'",
-  }
+    cmd = "rg --files --hidden --color=never",
+    hidden = false,
+    previewer = { enabled = false },
+    file_icons = false,
+    color_icons = false,
+    git_icons = false,
+    fzf_opts = {
+      ["--scheme"] = "path",
+      ["--tiebreak"] = "length,begin,index",
+    },
+  },
+  grep = {
+    previewer = { enabled = false },
+    file_icons = false,
+    color_icons = false,
+    git_icons = false,
+  },
 })
 
 local map = vim.keymap.set
@@ -33,12 +34,14 @@ local map = vim.keymap.set
 -- File finding
 map('n', '<leader>ff', fzf.files, { desc = 'Find files' })
 
--- Search
+-- Live grep
 map('n', '<leader>fg', fzf.live_grep, { desc = 'Live grep' })
+
+-- Word under cursor
 map('n', '<leader>fs', fzf.grep_cword, { desc = 'Grep word under cursor' })
 
 -- Visual selection grep
-function vim.getVisualSelection()
+local get_visual = function()
   vim.cmd('noau normal! "vy"')
   local text = vim.fn.getreg('v')
   vim.fn.setreg('v', {})
@@ -47,11 +50,11 @@ function vim.getVisualSelection()
 end
 
 map('v', '<leader>fs', function()
-  fzf.grep({ search = vim.getVisualSelection() })
+  fzf.grep({ search = get_visual() })
 end, { desc = 'Grep selected text' })
 
 -- C/C++ scoped search
-local c_cpp_rg_opts = "-t c -t cpp -g '!TOOLS/' -g '!bsw1/' -g '!rte1/'"
+local c_cpp_rg_opts = "-t c -t cpp"
 
 map('n', '<leader>fgc', function()
   fzf.live_grep({ rg_opts = c_cpp_rg_opts })
@@ -62,12 +65,8 @@ map('n', '<leader>fsc', function()
 end, { desc = 'Grep word (C/C++)' })
 
 map('v', '<leader>fsc', function()
-  fzf.grep({ search = vim.getVisualSelection(), rg_opts = c_cpp_rg_opts })
+  fzf.grep({ search = get_visual(), rg_opts = c_cpp_rg_opts })
 end, { desc = 'Grep selected (C/C++)' })
 
--- Buffers, help, history, resume
-map('n', '<leader>fb', fzf.buffers, { desc = 'Find buffers' })
-map('n', '<leader>o', fzf.buffers, { desc = 'Buffers' })
-map('n', '<leader>fh', fzf.help_tags, { desc = 'Help tags' })
-map('n', '<leader>fsh', fzf.search_history, { desc = 'Search history' })
+-- Resume
 map('n', '<leader>fr', fzf.resume, { desc = 'Resume last search' })

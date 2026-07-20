@@ -1,6 +1,9 @@
 -- Enable LSP servers
 vim.lsp.enable('clangd')
 vim.lsp.enable('pyright')
+vim.lsp.enable("gopls")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("jsonls")
 
 local map = vim.keymap.set
 
@@ -22,23 +25,36 @@ map('n', '<leader>cl', vim.lsp.codelens.run, { desc = 'Run code lens' })
 map('n', '[g', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
 map('n', ']g', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 
--- Telescope LSP pickers
-local ok, builtin = pcall(require, 'telescope.builtin')
+local ok, fzf = pcall(require, "fzf-lua")
+
 if ok then
-  map('n', '<space>o', builtin.lsp_document_symbols, { desc = 'Document symbols' })
-  map('n', '<space>s', builtin.lsp_workspace_symbols, { desc = 'Workspace symbols' })
-  map('n', '<space>a', builtin.diagnostics, { desc = 'Show diagnostics' })
+    map("n", "<leader>go", fzf.lsp_document_symbols, { desc = "Document symbols" })
+    map("n", "<leader>ws", fzf.lsp_workspace_symbols, { desc = "Workspace symbols" })
+    map("n", "<leader>ga", fzf.diagnostics_document, { desc = "Document diagnostics" })
+    -- 或者：
+    -- map("n", "a", fzf.diagnostics_workspace, { desc = "Workspace diagnostics" })
 end
 
--- Highlight symbol under cursor on idle
-vim.api.nvim_create_autocmd('CursorHold', {
-  callback = function() vim.lsp.buf.document_highlight() end,
-})
-vim.api.nvim_create_autocmd('CursorMoved', {
-  callback = function() vim.lsp.buf.clear_references() end,
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+        if client:supports_method("textDocument/documentHighlight") then
+            vim.api.nvim_create_autocmd("CursorHold", {
+                buffer = ev.buf,
+                callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd("CursorMoved", {
+                buffer = ev.buf,
+                callback = vim.lsp.buf.clear_references,
+            })
+        end
+    end,
 })
 
 -- Organize imports
 vim.api.nvim_create_user_command('OR', function()
   vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
 end, {})
+
